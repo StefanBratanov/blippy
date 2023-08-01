@@ -9,8 +9,6 @@
         </encoder>
     </appender>
 
-    <logger name="org.jupnp" level="ERROR"/>
-
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
