@@ -9,7 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import java.util.concurrent.CompletableFuture;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,7 @@ public class UdpTrackerClient {
             .option(ChannelOption.SO_BROADCAST, true)
             .handler(
                 new ChannelInitializer<DatagramChannel>() {
-                  protected void initChannel(@NotNull final DatagramChannel datagramChannel) {
+                  protected void initChannel(final DatagramChannel datagramChannel) {
                     datagramChannel
                         .pipeline()
                         .addLast(
