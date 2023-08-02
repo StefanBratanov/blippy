@@ -1,10 +1,10 @@
 package blippy.metainfo;
 
+import blippy.crypto.Hashing;
 import blippy.encoding.Bencoding;
-import blippy.metainfo.Metainfo.Info;
-import blippy.metainfo.Metainfo.MultipleFileInfo;
-import blippy.metainfo.Metainfo.MultipleFileInfo.File;
-import blippy.metainfo.Metainfo.SingleFileInfo;
+import blippy.metainfo.Info.MultipleFileInfo;
+import blippy.metainfo.Info.MultipleFileInfo.File;
+import blippy.metainfo.Info.SingleFileInfo;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -22,6 +22,7 @@ public class MetainfoDecoder {
       final Map<String, Object> metainfo = Bencoding.decodeDictionary(torrent.readAllBytes());
       final URI announce = new URI((String) metainfo.get("announce"));
       final Map<String, Object> infoDictionary = (Map<String, Object>) metainfo.get("info");
+      final byte[] infoHash = Hashing.sha1(Bencoding.encodeMap(infoDictionary));
       final Info info;
       if (infoDictionary.containsKey("files")) {
         // Multiple File Mode
@@ -35,10 +36,10 @@ public class MetainfoDecoder {
                           return new File(length, path);
                         })
                     .toList();
-        info = new MultipleFileInfo(infoDictionary, files);
+        info = new MultipleFileInfo(infoDictionary, infoHash, files);
       } else {
         // Single File Mode
-        info = new SingleFileInfo(infoDictionary);
+        info = new SingleFileInfo(infoDictionary, infoHash);
       }
       return new Metainfo(announce, info);
     } catch (final IOException | URISyntaxException ex) {

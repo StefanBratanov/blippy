@@ -1,9 +1,6 @@
 package blippy.tracker;
 
-import blippy.crypto.Hashing;
-import blippy.encoding.Bencoding;
 import blippy.metainfo.Metainfo;
-import blippy.metainfo.Metainfo.Info;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -56,9 +53,7 @@ public class UdpTrackerRequestHandler extends SimpleChannelInboundHandler<Datagr
         announceRequest.writeLong(connectionId);
         announceRequest.writeInt(Action.ANNOUNCE.ordinal());
         announceRequest.writeInt(transactionId);
-        final Info info = metainfo.info();
-        final byte[] infoHash = Hashing.sha1(Bencoding.encodeMap(info.getDictionary()));
-        announceRequest.writeBytes(infoHash);
+        announceRequest.writeBytes(metainfo.info().getInfoHash());
         final byte[] peerId = new byte[20];
         SecureRandom.getInstanceStrong().nextBytes(peerId);
         announceRequest.writeBytes(peerId);
