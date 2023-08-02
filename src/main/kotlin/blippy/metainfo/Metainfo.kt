@@ -1,9 +1,9 @@
-package blippy.metainfo;
+package blippy.metainfo
 
-import java.net.URI;
+import java.net.URI
 
 /**
- * <a href="https://wiki.theory.org/BitTorrentSpecification#Metainfo_File_Structure">Metainfo File
- * Structure</a>
+ * [Metainfo File
+ * Structure](https://wiki.theory.org/BitTorrentSpecification#Metainfo_File_Structure)
  */
-public record Metainfo(URI announce, Info info) {}
+data class Metainfo(val announce: URI, val info: Info)

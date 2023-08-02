@@ -1,5 +1,5 @@
-package blippy.tracker;
+package blippy.tracker
 
-import java.net.InetAddress;
+import java.net.InetAddress
 
-public record Tracker(InetAddress address, String path, int port) {}
+data class Tracker(val address: InetAddress, val path: String, val port: Int)

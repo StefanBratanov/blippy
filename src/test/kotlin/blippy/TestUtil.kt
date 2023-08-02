@@ -1,10 +1,9 @@
-package blippy;
+package blippy
 
-import java.io.InputStream;
+import java.io.InputStream
 
-public class TestUtil {
-
-  public static InputStream readResource(final String resource) {
-    return Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-  }
+object TestUtil {
+    fun readResource(resource: String): InputStream {
+        return Thread.currentThread().contextClassLoader.getResourceAsStream(resource)!!
+    }
 }

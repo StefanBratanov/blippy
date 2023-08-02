@@ -1,8 +1,9 @@
-package blippy;
+package blippy
 
-public class Blippy {
-
-  public static void main(String[] args) {
-    // TODO
-  }
+object Blippy {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        // TODO
+        println("Hello Blippy")
+    }
 }

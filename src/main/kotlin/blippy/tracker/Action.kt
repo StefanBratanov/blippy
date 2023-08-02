@@ -1,8 +1,8 @@
-package blippy.tracker;
+package blippy.tracker
 
-public enum Action {
-  CONNECT,
-  ANNOUNCE,
-  SCRAPE,
-  ERROR
+enum class Action {
+    CONNECT,
+    ANNOUNCE,
+    SCRAPE,
+    ERROR,
 }

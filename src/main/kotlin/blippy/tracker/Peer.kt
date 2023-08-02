@@ -1,5 +1,5 @@
-package blippy.tracker;
+package blippy.tracker
 
-import java.net.InetAddress;
+import java.net.InetAddress
 
-public record Peer(InetAddress address, int port) {}
+data class Peer(val address: InetAddress, val port: Int)

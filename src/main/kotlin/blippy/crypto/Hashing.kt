@@ -1,23 +1,23 @@
-package blippy.crypto;
+package blippy.crypto
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
-public class Hashing {
+object Hashing {
+    private val SHA1_MESSAGE_DIGEST_THREAD_LOCAL =
+        ThreadLocal.withInitial { getMessageDigest("SHA-1") }
 
-  private static final ThreadLocal<MessageDigest> SHA1_MESSAGE_DIGEST_THREAD_LOCAL =
-      ThreadLocal.withInitial(() -> getMessageDigest("SHA-1"));
-
-  public static byte[] sha1(final byte[] input) {
-    final MessageDigest md = SHA1_MESSAGE_DIGEST_THREAD_LOCAL.get();
-    return md.digest(input);
-  }
-
-  private static MessageDigest getMessageDigest(final String algorithm) {
-    try {
-      return MessageDigest.getInstance(algorithm);
-    } catch (final NoSuchAlgorithmException ex) {
-      throw new IllegalStateException(algorithm + " algorithm not available", ex);
+    @JvmStatic
+    fun sha1(input: ByteArray?): ByteArray {
+        val md = SHA1_MESSAGE_DIGEST_THREAD_LOCAL.get()
+        return md.digest(input)
     }
-  }
+
+    private fun getMessageDigest(algorithm: String): MessageDigest {
+        return try {
+            MessageDigest.getInstance(algorithm)
+        } catch (ex: NoSuchAlgorithmException) {
+            throw IllegalStateException("$algorithm algorithm not available", ex)
+        }
+    }
 }

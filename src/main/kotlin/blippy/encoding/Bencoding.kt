@@ -1,19 +1,17 @@
-package blippy.encoding;
+package blippy.encoding
 
-import com.dampcake.bencode.Bencode;
-import com.dampcake.bencode.Type;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import com.dampcake.bencode.Bencode
+import com.dampcake.bencode.Type
+import java.nio.charset.StandardCharsets
 
-public class Bencoding {
+object Bencoding {
+    private val BENCODE = Bencode(StandardCharsets.ISO_8859_1)
 
-  private static final Bencode BENCODE = new Bencode(StandardCharsets.ISO_8859_1);
+    fun encodeMap(map: Map<*, *>): ByteArray {
+        return BENCODE.encode(map)
+    }
 
-  public static byte[] encodeMap(final Map<?, ?> map) {
-    return BENCODE.encode(map);
-  }
-
-  public static Map<String, Object> decodeDictionary(final byte[] bytes) {
-    return BENCODE.decode(bytes, Type.DICTIONARY);
-  }
+    fun decodeDictionary(bytes: ByteArray): Map<String, Any> {
+        return BENCODE.decode(bytes, Type.DICTIONARY)
+    }
 }

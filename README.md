@@ -1,5 +1,5 @@
 # blippy
 
-Blippy is a Java implementation of the BitTorrent protocol using Netty.
+Blippy is a Kotlin implementation of the BitTorrent protocol using Netty.
 
 **⚠️ Work in progress! ⚠️**

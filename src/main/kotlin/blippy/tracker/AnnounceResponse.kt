@@ -1,5 +1,3 @@
-package blippy.tracker;
+package blippy.tracker
 
-import java.util.List;
-
-public record AnnounceResponse(int interval, int leechers, int seeders, List<Peer> peers) {}
+data class AnnounceResponse(val interval: Int, val leechers: Int, val seeders: Int, val peers: List<Peer>)

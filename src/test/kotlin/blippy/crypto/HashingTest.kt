@@ -1,17 +1,16 @@
-package blippy.crypto;
+package blippy.crypto
 
-import static org.assertj.core.api.Assertions.assertThat;
+import blippy.crypto.Hashing.sha1
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Test;
-
-class HashingTest {
-
-  @Test
-  void hashesInputToSha1() {
-    final byte[] result = Hashing.sha1("foobar".getBytes());
-    assertThat(result)
-        .hasSize(20)
-        .asHexString()
-        .isEqualTo("8843D7F92416211DE9EBB963FF4CE28125932878");
-  }
+internal class HashingTest {
+    @Test
+    fun hashesInputToSha1() {
+        val result = sha1("foobar".toByteArray())
+        Assertions.assertThat(result)
+            .hasSize(20)
+            .asHexString()
+            .isEqualTo("8843D7F92416211DE9EBB963FF4CE28125932878")
+    }
 }
